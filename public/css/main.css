@@ -1,0 +1,11 @@
+button {
+  transition: color 0.2s ease-in-out;
+}
+
+button.active {
+  color: red;
+}
+
+button.inactive {
+  color: blue;
+}
