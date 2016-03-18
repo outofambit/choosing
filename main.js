@@ -11,7 +11,7 @@ class SwitchSet extends React.Component {
   constructor(props) {
     super(props);
 
-    var kvs = this.props.switchData.map((da) => {
+    let kvs = this.props.switchData.map((da) => {
       return [da.label, false];
     });
     let stateMap = new Map(kvs);
@@ -41,10 +41,10 @@ class SwitchSet extends React.Component {
       </div>
     );
   }
-  
+
 }
 
-var swda = {
+let swda = {
   switchData:
     [
       {
@@ -58,11 +58,7 @@ var swda = {
       {
         label: 'stay',
         action: () => {console.log('staying!')}
-      },
-      {
-        label: 'chinta',
-        action: () => {console.log('chinta!')}
-      },
+      }
     ]
 };
 
