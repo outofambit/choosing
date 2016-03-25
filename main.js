@@ -16,7 +16,8 @@ class SwitchSet extends React.Component {
     });
     let stateMap = new Map(kvs);
     this.state = {
-      switches: stateMap
+      switches: stateMap,
+      clicks: 0
     };
   }
 
@@ -27,19 +28,27 @@ class SwitchSet extends React.Component {
     )
     // set state of switches
     this.setState({switches: newSwitchMap});
+    this.setState({clicks: this.state.clicks + 1});
   }
 
   render () {
-    let sws = this.props.switchData.map(function(da) {
-      return (
-        <Switch {...da} active={this.state.switches.get(da.label)} parentAction={this.handleSwitchClicked.bind(this)} key={da.label} />
-      );
-    }.bind(this));
+    let cutoff = this.state.clicks
+    console.log(cutoff)
+    let sws = this.props.switchData.map((da, ind, arr) => {
+      let distInd = Math.floor(Math.abs(ind - arr.length/2))
+      console.log(distInd)
+      if (distInd <= cutoff) {
+        return (
+          <Switch {...da} active={this.state.switches.get(da.label)} parentAction={this.handleSwitchClicked.bind(this)} key={da.label} />
+        )
+      }
+
+    })
     return (
       <div className="switchSet">
         {sws}
       </div>
-    );
+    )
   }
 
 }
