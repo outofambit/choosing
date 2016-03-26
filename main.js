@@ -8,7 +8,7 @@ const Switch = (props) =>
   </button>
 
 const Space = (props) =>
-  <span onClick={() => {props.action(); props.parentAction(props.label)}}>
+  <span onClick={() => {props.parentAction(props.ind)}}>
     -
   </span>
 
@@ -37,6 +37,19 @@ class SwitchSet extends React.Component {
     this.setState({clicks: this.state.clicks + 1});
   }
 
+  handleSpaceClicked (ind) {
+    console.log(ind)
+    let newInd = Math.round((this.state.showInds[ind] + this.state.showInds[ind+1]) / 2)
+    let showInds = this.state.showInds
+    showInds.push(newInd)
+    showInds.sort((a, b) => {
+      return a - b
+    })
+    // TODO: dont do if new ind is already in the array
+    this.setState({showInds: showInds})
+    this.setState({clicks: this.state.clicks + 1});
+  }
+
   render () {
     let sws = this.props.switchData.map((da, ind, arr) => {
       if (this.state.showInds.includes(ind)) {
@@ -45,11 +58,17 @@ class SwitchSet extends React.Component {
         )
       }
     })
+    // clean up the undefineds
+    sws = sws.filter(val => {
+      if (val) {return true}
+      return false
+    })
+    // add in the spaces to a new array
     let sswss = [];
-    sws.forEach((da, ind, arr) => {
-      sswss.push(da)
-      if (ind > 0 && ind < arr.length-1) {
-        sswss.push(<Space/>)
+    sws.forEach((el, ind, arr) => {
+      sswss.push(el)
+      if (ind != arr.length-1) {
+        sswss.push(<Space key={'space'+ind-1} ind={ind-1} parentAction={this.handleSpaceClicked.bind(this)} />)
       }
     })
     return (
