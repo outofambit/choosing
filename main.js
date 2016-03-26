@@ -68,7 +68,7 @@ class SwitchSet extends React.Component {
     sws.forEach((el, ind, arr) => {
       sswss.push(el)
       if (ind != arr.length-1) {
-        sswss.push(<Space key={'space'+ind-1} ind={ind-1} parentAction={this.handleSpaceClicked.bind(this)} />)
+        sswss.push(<Space key={'space'+ind} ind={ind} parentAction={this.handleSpaceClicked.bind(this)} />)
       }
     })
     return (
@@ -79,25 +79,18 @@ class SwitchSet extends React.Component {
   }
 }
 
-let swda = {
-  switchData:
-    [
-      {
-        label: 'hello',
-        action: () => {console.log('hello!')}
-      },
-      {
-        label: 'goodbye',
-        action: () => {console.log('goodbye!')}
-      },
-      {
-        label: 'stay',
-        action: () => {console.log('staying!')}
-      }
-    ]
+// make some test data
+let swda = []
+for (var i = 0; i < 12; i++) {
+  swda.push(
+    {
+      label: i,
+      action: () => {console.log(i)}
+    }
+  )
 }
 
 ReactDOM.render(
-  <SwitchSet {...swda} />,
+  <SwitchSet switchData={swda} />,
   document.getElementById('react')
 );
