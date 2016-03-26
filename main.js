@@ -5,7 +5,12 @@ let ReactDOM = require('react-dom');
 const Switch = (props) =>
   <button key={props.label} className={props.active ? 'active' : 'inactive'} onClick={() => {props.action(); props.parentAction(props.label)}}>
     {props.label}
-  </button>;
+  </button>
+
+const Space = (props) =>
+  <span onClick={() => {props.action(); props.parentAction(props.label)}}>
+    -
+  </span>
 
 class SwitchSet extends React.Component {
   constructor(props) {
@@ -17,7 +22,8 @@ class SwitchSet extends React.Component {
     let stateMap = new Map(kvs);
     this.state = {
       switches: stateMap,
-      clicks: 0
+      clicks: 0,
+      showInds: [0, this.props.switchData.length-1]
     };
   }
 
@@ -32,25 +38,26 @@ class SwitchSet extends React.Component {
   }
 
   render () {
-    let cutoff = this.state.clicks
-    console.log(cutoff)
     let sws = this.props.switchData.map((da, ind, arr) => {
-      let distInd = Math.floor(Math.abs(ind - arr.length/2))
-      console.log(distInd)
-      if (distInd <= cutoff) {
+      if (this.state.showInds.includes(ind)) {
         return (
           <Switch {...da} active={this.state.switches.get(da.label)} parentAction={this.handleSwitchClicked.bind(this)} key={da.label} />
         )
       }
-
+    })
+    let sswss = [];
+    sws.forEach((da, ind, arr) => {
+      sswss.push(da)
+      if (ind > 0 && ind < arr.length-1) {
+        sswss.push(<Space/>)
+      }
     })
     return (
       <div className="switchSet">
-        {sws}
+        {sswss}
       </div>
     )
   }
-
 }
 
 let swda = {
@@ -72,6 +79,7 @@ let swda = {
 };
 
 ReactDOM.render(
+  // <SwitchSet {...swda} />,
   <SwitchSet {...swda} />,
   document.getElementById('react')
 );
