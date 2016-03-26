@@ -1,6 +1,7 @@
 
 let React = require('react');
 let ReactDOM = require('react-dom');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 const Switch = (props) =>
   <div className='switch'>
@@ -12,7 +13,7 @@ const Switch = (props) =>
 const Space = (props) =>
   <span className='space'
         onClick={() => {props.parentAction(props.ind)}}>
-        &nbsp;
+        &nbsp; {/* this is how we make react render this*/}
   </span>
 
 class SwitchSet extends React.Component {
@@ -91,9 +92,9 @@ class SwitchSet extends React.Component {
       }
     })
     return (
-      <div className="switchSet">
-        {sswss}
-      </div>
+        <ReactCSSTransitionGroup className="switchSet" transitionName="switch" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+          {sswss}
+        </ReactCSSTransitionGroup>
     )
   }
 }
