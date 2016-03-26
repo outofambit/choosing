@@ -3,7 +3,7 @@ let React = require('react');
 let ReactDOM = require('react-dom');
 
 const Switch = (props) =>
-  <button key={props.label} className={props.active ? 'active' : 'inactive'} onClick={() => {props.action(); props.parentAction(props.label)}}>
+  <button key={props.label} className={'clicked-' + props.clicks + (props.active ? ' active' : ' inactive')} onClick={() => {props.action(); props.parentAction(props.label)}}>
     {props.label}
   </button>
 
@@ -16,13 +16,20 @@ class SwitchSet extends React.Component {
   constructor(props) {
     super(props);
 
+    // set up state (on/off) map
     let kvs = this.props.switchData.map((da) => {
       return [da.label, false];
     });
     let stateMap = new Map(kvs);
+
+    let kkvs = this.props.switchData.map((da) => {
+      return [da.label, 0];
+    });
+    let clicksMap = new Map(kkvs);
+
     this.state = {
       switches: stateMap,
-      clicks: 0,
+      clicks: clicksMap,
       showInds: [0, this.props.switchData.length-1]
     };
   }
@@ -32,9 +39,11 @@ class SwitchSet extends React.Component {
     this.state.switches.forEach((v, k, o) =>
       newSwitchMap.set(k, (k == label))
     )
+    let newClicksMap = this.state.clicks;
+    newClicksMap.set(label, (this.state.clicks.get(label)+1) % this.props.maxClicks)
     // set state of switches
     this.setState({switches: newSwitchMap});
-    this.setState({clicks: this.state.clicks + 1});
+    this.setState({clicks: newClicksMap});
   }
 
   handleSpaceClicked (ind) {
@@ -47,14 +56,18 @@ class SwitchSet extends React.Component {
     })
     // TODO: dont do if new ind is already in the array
     this.setState({showInds: showInds})
-    this.setState({clicks: this.state.clicks + 1});
+    // this.setState({clicks: this.state.clicks + 1});
   }
 
   render () {
     let sws = this.props.switchData.map((da, ind, arr) => {
       if (this.state.showInds.includes(ind)) {
         return (
-          <Switch {...da} active={this.state.switches.get(da.label)} parentAction={this.handleSwitchClicked.bind(this)} key={da.label} />
+          <Switch {...da}
+            active={this.state.switches.get(da.label)}
+            clicks={this.state.clicks.get(da.label)}
+            parentAction={this.handleSwitchClicked.bind(this)}
+            key={da.label} />
         )
       }
     })
@@ -68,7 +81,10 @@ class SwitchSet extends React.Component {
     sws.forEach((el, ind, arr) => {
       sswss.push(el)
       if (ind != arr.length-1) {
-        sswss.push(<Space key={'space'+ind} ind={ind} parentAction={this.handleSpaceClicked.bind(this)} />)
+        sswss.push(<Space
+          key={'space'+ind}
+          ind={ind}
+          parentAction={this.handleSpaceClicked.bind(this)} />)
       }
     })
     return (
@@ -84,13 +100,13 @@ let swda = []
 for (var i = 0; i < 12; i++) {
   swda.push(
     {
-      label: i,
+      label: 'foo '+i,
       action: () => {console.log(i)}
     }
   )
 }
 
 ReactDOM.render(
-  <SwitchSet switchData={swda} />,
+  <SwitchSet switchData={swda} maxClicks='10' />,
   document.getElementById('react')
 );

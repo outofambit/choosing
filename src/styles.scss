@@ -1,11 +1,33 @@
-button {
-  transition: color 0.2s ease-in-out;
+
+body {
+  width: 100vw;
+  height: 100vh;
 }
 
-button.active {
-  color: red;
-}
+.switchSet {
 
-button.inactive {
-  color: blue;
+  $button-steps: 10;
+
+  // width: 100vw;
+  // height: 100vh;
+
+  button {
+    transition: color 0.2s ease-in-out;
+    transition: padding 0.2s ease-in-out;
+  }
+
+  @for $i from 0 to $button-steps {
+    button.clicked-#{$i} {
+      padding: (($i+1)*2px) (($i+1)*6px) (($i+1)*3px) (($i+1)*6px);
+    }
+  }
+
+  button.active {
+    color: red;
+  }
+
+  button.inactive {
+    color: blue;
+  }
+
 }
