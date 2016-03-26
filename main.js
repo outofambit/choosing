@@ -95,10 +95,9 @@ let swda = {
         action: () => {console.log('staying!')}
       }
     ]
-};
+}
 
 ReactDOM.render(
-  // <SwitchSet {...swda} />,
   <SwitchSet {...swda} />,
   document.getElementById('react')
 );
