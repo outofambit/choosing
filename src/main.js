@@ -5,7 +5,7 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 const Switch = (props) =>
   <div className='switch'>
-  <button key={props.label} className={'clicked-' + props.clicks + (props.active ? ' active' : ' inactive')} onClick={() => {props.action(); props.parentAction(props.label)}}>
+  <button key={props.label} className={'clicked-' + props.clicks + (props.active ? ' active' : ' inactive')} onClick={() => {props.parentAction(props.label)}}>
     {props.label}
   </button>
   </div>
@@ -100,15 +100,15 @@ class SwitchSet extends React.Component {
 }
 
 // make some test data
-let swda = []
-for (var i = 0; i < 12; i++) {
-  swda.push(
-    {
-      label: 'foo '+i,
-      action: () => {console.log(i)}
-    }
-  )
-}
+let swda = [
+  {label: 'man'},
+  {label: 'masc'},
+  {label: 'sissy'},
+  {label: 'androgynous'},
+  {label: 'tomboy'},
+  {label: 'femme'},
+  {label: 'woman'},
+]
 
 ReactDOM.render(
   <SwitchSet switchData={swda} maxClicks='10' />,
