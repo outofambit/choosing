@@ -3,9 +3,11 @@ let React = require('react');
 let ReactDOM = require('react-dom');
 
 const Switch = (props) =>
+  <div className='switch'>
   <button key={props.label} className={'clicked-' + props.clicks + (props.active ? ' active' : ' inactive')} onClick={() => {props.action(); props.parentAction(props.label)}}>
     {props.label}
   </button>
+  </div>
 
 const Space = (props) =>
   <span onClick={() => {props.parentAction(props.ind)}}>
