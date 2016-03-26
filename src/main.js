@@ -10,8 +10,9 @@ const Switch = (props) =>
   </div>
 
 const Space = (props) =>
-  <span onClick={() => {props.parentAction(props.ind)}}>
-    -
+  <span className='space'
+        onClick={() => {props.parentAction(props.ind)}}>
+        &nbsp;
   </span>
 
 class SwitchSet extends React.Component {
@@ -110,5 +111,5 @@ for (var i = 0; i < 12; i++) {
 
 ReactDOM.render(
   <SwitchSet switchData={swda} maxClicks='10' />,
-  document.getElementById('react')
+  document.body
 );
