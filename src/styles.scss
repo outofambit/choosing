@@ -21,12 +21,10 @@ html, body {
   flex-wrap: nowrap;
   padding: 2rem;
 
-  .span {
-    display: flex;
-  }
-
-  .space {
+  span.space {
+    align-self: stretch;
     width: 0.5em;
+    cursor: pointer;
   }
 
   .switch {
