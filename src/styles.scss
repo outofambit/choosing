@@ -37,22 +37,20 @@ html, body {
     align-items: center;
 
     button {
-      transition: color 0.2s ease-in-out;
-      transition: padding 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
     }
 
     @for $i from 0 to $button-steps {
-      div.clicked-#{$i} {
+      button.clicked-#{$i} {
         padding: (($i+1)*2px) (($i+1)*6px) (($i+1)*3px) (($i+1)*6px);
+        font-size: 1+(0.5em + $i)
       }
     }
 
     button.active {
-      color: red;
     }
 
     button.inactive {
-      color: blue;
     }
 
   }
