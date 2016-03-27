@@ -21,6 +21,8 @@ html, body {
   flex-wrap: nowrap;
   padding: 2rem;
 
+  // transition: width 0.2s ease-in-out;
+
   span.space {
     align-self: stretch;
     width: 0.5em;
@@ -80,7 +82,17 @@ html, body {
     border-radius: 4px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .5);
     color: #333;
-    background-color: hsl(51, 30, 82);
+    background-color: hsl(0, 0, 100);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    .modal-msg {
+      padding: 4em;
+    }
 }
 
 // shamelessly ripped from bootstrap

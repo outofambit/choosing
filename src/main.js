@@ -95,12 +95,18 @@ class SwitchSet extends React.Component {
       }
     })
     return (
-        <ReactCSSTransitionGroup className="switchSet modal" transitionName="switch" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+        <ReactCSSTransitionGroup className="switchSet" transitionName="switch" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
           {sswss}
         </ReactCSSTransitionGroup>
     )
   }
 }
+
+const Modal = (props) =>
+  <div className='modal'>
+    <span className='modal-msg' >{props.message}</span>
+    {props.content}
+  </div>
 
 // make some test data
 let swda = [
@@ -113,7 +119,11 @@ let swda = [
   {label: 'woman'},
 ]
 
+let set = <SwitchSet switchData={swda} maxClicks='10' />
+
+let msg = 'Please choose from the options below'
+
 ReactDOM.render(
-  <SwitchSet switchData={swda} maxClicks='10' />,
+  <Modal content={set} message={msg} />,
   document.body
 );
