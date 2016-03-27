@@ -95,7 +95,7 @@ class SwitchSet extends React.Component {
       }
     })
     return (
-        <ReactCSSTransitionGroup className="switchSet" transitionName="switch" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+        <ReactCSSTransitionGroup className="switchSet modal" transitionName="switch" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
           {sswss}
         </ReactCSSTransitionGroup>
     )

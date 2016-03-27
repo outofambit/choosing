@@ -6,13 +6,12 @@ html, body {
   align-content: center;
   align-items: center;
   font-family: sans-serif;
+  background-color: hsl(0, 0, 40);
 }
 
 .switchSet {
 
   $button-steps: 10;
-
-  min-height: 100%;
 
   display: flex;
   flex-direction: row;
@@ -20,6 +19,7 @@ html, body {
   align-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  padding: 2rem;
 
   .span {
     display: flex;
@@ -73,6 +73,16 @@ html, body {
   }
   // end
 
+}
+
+.modal {
+    background-image: none;
+    border: 1px solid transparent;
+    border-color: #ccc;
+    border-radius: 4px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .5);
+    color: #333;
+    background-color: hsl(51, 30, 82);
 }
 
 // shamelessly ripped from bootstrap
