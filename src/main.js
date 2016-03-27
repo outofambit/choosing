@@ -7,7 +7,7 @@ const Switch = (props) =>
   <div className='switch'>
   <button
     key={props.label}
-    className={'btn clicked-' + props.clicks + (props.active ? ' active' : ' inactive')}
+    className={'btn btn-default clicked-' + props.clicks + (props.active ? ' active' : ' inactive')}
     onClick={() => {props.parentAction(props.label)}}>
     {props.label}
   </button>
