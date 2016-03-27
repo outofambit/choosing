@@ -1,7 +1,7 @@
 html, body {
   height: 100%;
   display: flex;
-  flex-direction: column;;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: center;
@@ -37,13 +37,14 @@ html, body {
     align-items: center;
 
     button {
-      transition: all 0.2s ease-in-out;
+      transition: padding 0.2s ease-in-out;
+      transition: font-size 0.2s ease-in-out;
     }
 
     @for $i from 0 to $button-steps {
       button.clicked-#{$i} {
         padding: (($i+1)*2px) (($i+1)*6px) (($i+1)*3px) (($i+1)*6px);
-        font-size: (1.0ex * ($i+2))
+        font-size: (1ex * ($i+2))
       }
     }
 
@@ -57,18 +58,13 @@ html, body {
 
   // react transition
   .switch-enter button, .switch-enter span {
-    // to override the normal class
     opacity: 0;
-    padding: 0px 0px 0px 0px !important;
-    width: 0% !important;
+    width: 0%;
   }
   .switch-enter.switch-enter-active button, .switch-enter.switch-enter-active span  {
-    // to override the normal class
     opacity: 1.0;
-    padding: 2px 6px 3px 6px !important;
-    width: 100% !important;
-    transition: padding 500ms ease-in;
-    transition-property: all;
+    width: 100%;
+    transition: all 500ms ease-in;
   }
 
   .switch-leave {
