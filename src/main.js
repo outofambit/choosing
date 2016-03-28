@@ -48,7 +48,7 @@ class SwitchSet extends React.Component {
       newSwitchMap.set(k, (k == label))
     )
     let newClicksMap = this.state.clicks;
-    newClicksMap.set(label, (this.state.clicks.get(label)+1) % this.props.maxClicks)
+    newClicksMap.set(label, Math.min(this.state.clicks.get(label)+1, this.props.maxClicks-1))
     // set state of switches
     this.setState({switches: newSwitchMap});
     this.setState({clicks: newClicksMap});
