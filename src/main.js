@@ -14,7 +14,7 @@ const Switch = (props) =>
   </div>
 
 const Space = (props) =>
-  <span className='space'
+  <span className={'space' + (props.entice ? ' clickme' : '')}
         onClick={() => {props.parentAction(props.ind)}}>
         &nbsp; {/* this is how we make react render this*/}
   </span>
@@ -37,7 +37,8 @@ class SwitchSet extends React.Component {
     this.state = {
       switches: stateMap,
       clicks: clicksMap,
-      showInds: [0, this.props.switchData.length-1]
+      showInds: [0, this.props.switchData.length-1],
+      entice: false
     };
   }
 
@@ -63,7 +64,19 @@ class SwitchSet extends React.Component {
     })
     // TODO: dont do if new ind is already in the array
     this.setState({showInds: showInds})
+    if (this.state.entice) {
+      this.setState({entice: false})
+    }
     // this.setState({clicks: this.state.clicks + 1});
+  }
+
+  // called right after the element first renders
+  componentDidMount () {
+    setTimeout(() => {
+      if (this.state.showInds.length == 2) {
+        this.setState({entice: true})
+      }
+    }, 10000);
   }
 
   render () {
@@ -91,7 +104,8 @@ class SwitchSet extends React.Component {
         sswss.push(<Space
           key={'space'+ind}
           ind={ind}
-          parentAction={this.handleSpaceClicked.bind(this)} />)
+          parentAction={this.handleSpaceClicked.bind(this)}
+          entice={this.state.entice} />)
       }
     })
     return (
