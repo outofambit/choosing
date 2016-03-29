@@ -133,7 +133,7 @@ let swda = [
   {label: 'woman'},
 ]
 
-let set = <SwitchSet switchData={swda} maxClicks='10' />
+let set = <SwitchSet switchData={swda} maxClicks='20' />
 
 let msg = 'Please choose from the options below'
 
