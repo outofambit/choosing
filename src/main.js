@@ -75,7 +75,7 @@ class SwitchSet extends React.Component {
       if (this.state.showInds.length == 2) {
         this.setState({entice: true})
       }
-    }, 10000);
+    }, 7000);
   }
 
   render () {
