@@ -37,24 +37,6 @@ class SwitchSet extends React.Component {
   }
 
   handleSwitchClicked (label) {
-
-    if (this.state.clicks.get(label) == 0) {
-      let ind = this.props.switchData.findIndex((el, ind, arr) => {
-        return el.label == label
-      })
-      let newInd = this.state.showInds[ind] + Math.round((this.state.showInds[ind+1] - this.state.showInds[ind]) / 2)
-
-      let showInds = this.state.showInds
-      showInds.push(newInd)
-      showInds.sort((a, b) => {
-        return a - b
-      })
-      this.setState({showInds: showInds})
-      if (this.state.entice) {
-        this.setState({entice: false})
-      }
-    }
-
     let newSwitchMap = new Map();
     this.state.switches.forEach((v, k, o) =>
       newSwitchMap.set(k, (k == label))
