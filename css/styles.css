@@ -18,8 +18,20 @@ html, body {
   padding: 2rem; }
   .switchSet span.space {
     align-self: stretch;
-    width: 0.5em;
-    cursor: pointer; }
+    width: 1.5em;
+    cursor: pointer;
+    border-radius: 4px; }
+  .switchSet span.space.clickme {
+    animation-duration: 3s;
+    animation-name: pulse;
+    animation-direction: alternate;
+    animation-iteration-count: infinite; }
+
+@keyframes pulse {
+  from {
+    background-color: transparent; }
+  to {
+    background-color: rgba(255, 165, 0, 0.5); } }
   .switchSet .switch {
     display: flex;
     justify-content: center;
@@ -58,6 +70,36 @@ html, body {
     .switchSet .switch button.clicked-9 {
       padding: 20px 60px 30px 60px;
       font-size: 11ex; }
+    .switchSet .switch button.clicked-10 {
+      padding: 22px 66px 33px 66px;
+      font-size: 12ex; }
+    .switchSet .switch button.clicked-11 {
+      padding: 24px 72px 36px 72px;
+      font-size: 13ex; }
+    .switchSet .switch button.clicked-12 {
+      padding: 26px 78px 39px 78px;
+      font-size: 14ex; }
+    .switchSet .switch button.clicked-13 {
+      padding: 28px 84px 42px 84px;
+      font-size: 15ex; }
+    .switchSet .switch button.clicked-14 {
+      padding: 30px 90px 45px 90px;
+      font-size: 16ex; }
+    .switchSet .switch button.clicked-15 {
+      padding: 32px 96px 48px 96px;
+      font-size: 17ex; }
+    .switchSet .switch button.clicked-16 {
+      padding: 34px 102px 51px 102px;
+      font-size: 18ex; }
+    .switchSet .switch button.clicked-17 {
+      padding: 36px 108px 54px 108px;
+      font-size: 19ex; }
+    .switchSet .switch button.clicked-18 {
+      padding: 38px 114px 57px 114px;
+      font-size: 20ex; }
+    .switchSet .switch button.clicked-19 {
+      padding: 40px 120px 60px 120px;
+      font-size: 21ex; }
   .switchSet .switch-enter button, .switchSet .switch-enter span {
     opacity: 0;
     width: 0%; }
@@ -85,7 +127,7 @@ html, body {
 .btn {
   display: inline-block;
   padding: 6px 12px;
-  margin-bottom: 0;
+  margin: 0;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.42857143;
