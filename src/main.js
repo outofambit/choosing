@@ -24,14 +24,13 @@ class SwitchSet extends React.Component {
     let stateMap = new Map(kvs);
 
     let kkvs = this.props.switchData.map((da) => {
-      return [da.label, 0];
+      return [da.label, da.show ? 2 : 0];
     });
     let clicksMap = new Map(kkvs);
 
     this.state = {
       switches: stateMap,
       clicks: clicksMap,
-      showInds: props.showInds,
       entice: false
     };
   }
@@ -57,9 +56,44 @@ class SwitchSet extends React.Component {
     }, 7000);
   }
 
+  calculateSeedIndices() {
+    let ret = []
+    for (var i = 0; i < this.props.switchData.length; i++) {
+      if (this.state.clicks.get(this.props.switchData[i].label) > 0) {
+        continue
+      }
+      // left
+      let left = 0;
+      for (var j = i; j > -1; j--) {
+        if (this.state.clicks.get(this.props.switchData[j].label) > 0) {
+          left = j
+          break
+        }
+      }
+      // right
+      let right = this.props.switchData.length-1;
+      for (var j = i; j < this.props.switchData.length; j++) {
+        if (this.state.clicks.get(this.props.switchData[j].label) > 0) {
+          right = j
+          break
+        }
+      }
+      // am i between those?
+      if (i < this.props.switchData.length/2 && Math.floor((right - left)/2 + left) == i) {
+        ret.push(i)
+      }
+      else if (i > this.props.switchData.length/2 && Math.ceil((right - left)/2 + left) == i) {
+        ret.push(i)
+      }
+
+    }
+    return ret
+  }
+
   render () {
+    let seedIndices = this.calculateSeedIndices()
     let sws = this.props.switchData.map((da, ind, arr) => {
-      if (this.state.showInds.includes(ind)) {
+      if (this.state.clicks.get(da.label) > 0 || seedIndices.includes(ind)) {
         return (
           <Switch {...da}
             active={this.state.switches.get(da.label)}
@@ -70,10 +104,8 @@ class SwitchSet extends React.Component {
       }
     })
     // clean up the undefineds
-    sws = sws.filter(val => {
-      if (val) {return true}
-      return false
-    })
+    sws = sws.filter(val => { return val })
+
     return (
         <ReactCSSTransitionGroup className="switchSet" transitionName="switch" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
           {sws}
@@ -92,7 +124,9 @@ const Modal = (props) =>
 let swda = [
   {label: 'stoic'},
   {label: 'strong'},
-  {label: 'manly'},
+  {label: 'manly',
+    show: true
+  },
   {label: 'masc'},
   {label: 'boyish'},
   {label: 'sissy'},
@@ -103,12 +137,14 @@ let swda = [
   {label: 'tomboy'},
   {label: 'girly'},
   {label: 'femme'},
-  {label: 'womanly'},
+  {label: 'womanly',
+    show: true
+  },
   {label: 'coquettish'},
   {label: 'vulnerable'}
 ]
 
-let set = <SwitchSet switchData={swda} maxClicks='20' showInds={[2, 12]} />
+let set = <SwitchSet switchData={swda} maxClicks='20'/>
 
 let msg = 'Please choose from the options below'
 
