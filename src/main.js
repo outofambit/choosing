@@ -55,7 +55,7 @@ class SwitchSet extends React.Component {
   }
 
   handleSpaceClicked (ind) {
-    let newInd = ind + Math.floor((this.state.showInds[ind+1] - this.state.showInds[ind]) / 2)
+    let newInd = this.state.showInds[ind] + Math.round((this.state.showInds[ind+1] - this.state.showInds[ind]) / 2)
     let showInds = this.state.showInds
     showInds.push(newInd)
     showInds.sort((a, b) => {
