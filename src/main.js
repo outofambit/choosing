@@ -57,7 +57,7 @@ class SwitchSet extends React.Component {
   handleSpaceClicked (ind) {
     let newInd = this.state.showInds[ind] + Math.round((this.state.showInds[ind+1] - this.state.showInds[ind]) / 2)
     // if this is already shown, don't do a refresh
-    if (showInds.includes(newInd)) {
+    if (this.state.showInds.includes(newInd)) {
       return
     }
 
