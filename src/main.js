@@ -37,7 +37,7 @@ class SwitchSet extends React.Component {
     this.state = {
       switches: stateMap,
       clicks: clicksMap,
-      showInds: [0, this.props.switchData.length-1],
+      showInds: props.showInds,
       entice: false
     };
   }
@@ -126,16 +126,25 @@ const Modal = (props) =>
 
 // make some test data
 let swda = [
-  {label: 'man'},
+  {label: 'stoic'},
+  {label: 'strong'},
+  {label: 'manly'},
   {label: 'masc'},
+  {label: 'boyish'},
   {label: 'sissy'},
+  {label: 'genderbending'},
   {label: 'androgynous'},
+  // {label: 'queer'},
+  {label: 'butch'},
   {label: 'tomboy'},
+  {label: 'girly'},
   {label: 'femme'},
-  {label: 'woman'},
+  {label: 'womanly'},
+  {label: 'coquettish'},
+  {label: 'vulnerable'}
 ]
 
-let set = <SwitchSet switchData={swda} maxClicks='20' />
+let set = <SwitchSet switchData={swda} maxClicks='20' showInds={[2, 12]} />
 
 let msg = 'Please choose from the options below'
 
