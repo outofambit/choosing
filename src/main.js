@@ -56,17 +56,20 @@ class SwitchSet extends React.Component {
 
   handleSpaceClicked (ind) {
     let newInd = this.state.showInds[ind] + Math.round((this.state.showInds[ind+1] - this.state.showInds[ind]) / 2)
+    // if this is already shown, don't do a refresh
+    if (showInds.includes(newInd)) {
+      return
+    }
+
     let showInds = this.state.showInds
     showInds.push(newInd)
     showInds.sort((a, b) => {
       return a - b
     })
-    // TODO: dont do if new ind is already in the array
     this.setState({showInds: showInds})
     if (this.state.entice) {
       this.setState({entice: false})
     }
-    // this.setState({clicks: this.state.clicks + 1});
   }
 
   // called right after the element first renders
