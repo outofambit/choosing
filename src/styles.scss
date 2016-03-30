@@ -62,7 +62,7 @@ html, body {
     @for $i from 0 to $button-steps {
       button.clicked-#{$i} {
         padding: (($i+1)*2px) (($i+1)*6px) (($i+1)*3px) (($i+1)*6px);
-        font-size: (1ex * ($i+2))
+        font-size: (1ex * ($i))
       }
     }
 

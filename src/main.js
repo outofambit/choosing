@@ -13,12 +13,6 @@ const Switch = (props) =>
   </button>
   </div>
 
-const Space = (props) =>
-  <span className={'space' + (props.entice ? ' clickme' : '')}
-        onClick={() => {props.parentAction(props.ind)}}>
-        &nbsp; {/* this is how we make react render this*/}
-  </span>
-
 class SwitchSet extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +37,24 @@ class SwitchSet extends React.Component {
   }
 
   handleSwitchClicked (label) {
+
+    if (this.state.clicks.get(label) == 0) {
+      let ind = this.props.switchData.findIndex((el, ind, arr) => {
+        return el.label == label
+      })
+      let newInd = this.state.showInds[ind] + Math.round((this.state.showInds[ind+1] - this.state.showInds[ind]) / 2)
+
+      let showInds = this.state.showInds
+      showInds.push(newInd)
+      showInds.sort((a, b) => {
+        return a - b
+      })
+      this.setState({showInds: showInds})
+      if (this.state.entice) {
+        this.setState({entice: false})
+      }
+    }
+
     let newSwitchMap = new Map();
     this.state.switches.forEach((v, k, o) =>
       newSwitchMap.set(k, (k == label))
@@ -52,24 +64,6 @@ class SwitchSet extends React.Component {
     // set state of switches
     this.setState({switches: newSwitchMap});
     this.setState({clicks: newClicksMap});
-  }
-
-  handleSpaceClicked (ind) {
-    let newInd = this.state.showInds[ind] + Math.round((this.state.showInds[ind+1] - this.state.showInds[ind]) / 2)
-    // if this is already shown, don't do a refresh
-    if (this.state.showInds.includes(newInd)) {
-      return
-    }
-
-    let showInds = this.state.showInds
-    showInds.push(newInd)
-    showInds.sort((a, b) => {
-      return a - b
-    })
-    this.setState({showInds: showInds})
-    if (this.state.entice) {
-      this.setState({entice: false})
-    }
   }
 
   // called right after the element first renders
@@ -98,21 +92,9 @@ class SwitchSet extends React.Component {
       if (val) {return true}
       return false
     })
-    // add in the spaces to a new array
-    let sswss = [];
-    sws.forEach((el, ind, arr) => {
-      sswss.push(el)
-      if (ind != arr.length-1) {
-        sswss.push(<Space
-          key={'space'+ind}
-          ind={ind}
-          parentAction={this.handleSpaceClicked.bind(this)}
-          entice={this.state.entice} />)
-      }
-    })
     return (
         <ReactCSSTransitionGroup className="switchSet" transitionName="switch" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-          {sswss}
+          {sws}
         </ReactCSSTransitionGroup>
     )
   }
