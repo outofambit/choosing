@@ -62,25 +62,21 @@ html, body {
 
   }
 
-  div {
-    transition: padding 0.2s ease-in-out;
-
-    button {
-      transition: all 0.2s ease-in-out;
-    }
+  div button {
+    transition: all 0.2s ease-in-out;
   }
 
   div.clicked-0 button {
-      color: transparent;
-      padding: 0px;
-      width: 1em;
-      height: 1em;
+    color: transparent;
+    padding: 0px;
+    width: 1em;
+    height: 1em;
   }
 
   @for $i from 1 to $button-steps {
     div.clicked-#{$i} button {
-        padding: (($i)*2px) (($i)*6px) (($i)*3px) (($i)*6px);
-        font-size: (1ex * ($i))
+      padding: (($i)*2px) (($i)*6px) (($i)*3px) (($i)*6px);
+      font-size: (1ex * ($i))
     }
   }
 
