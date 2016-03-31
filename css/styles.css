@@ -16,96 +16,80 @@ html, body {
   align-items: center;
   flex-wrap: nowrap;
   padding: 2rem; }
-  .switchSet span.space {
-    align-self: stretch;
-    width: 1.5em;
-    cursor: pointer;
-    border-radius: 4px; }
-  .switchSet span.space.clickme {
-    animation-duration: 3s;
-    animation-name: pulse;
-    animation-direction: alternate;
-    animation-iteration-count: infinite; }
-
-@keyframes pulse {
-  from {
-    background-color: transparent; }
-  to {
-    background-color: rgba(255, 165, 0, 0.5); } }
   .switchSet .switch {
     display: flex;
     justify-content: center;
     align-content: center;
-    align-items: center; }
-    .switchSet .switch button {
-      transition: padding 0.2s ease-in-out;
-      transition: font-size 0.2s ease-in-out; }
-    .switchSet .switch button.clicked-0 {
-      padding: 2px 6px 3px 6px;
-      font-size: 2ex; }
-    .switchSet .switch button.clicked-1 {
-      padding: 4px 12px 6px 12px;
-      font-size: 3ex; }
-    .switchSet .switch button.clicked-2 {
-      padding: 6px 18px 9px 18px;
-      font-size: 4ex; }
-    .switchSet .switch button.clicked-3 {
-      padding: 8px 24px 12px 24px;
-      font-size: 5ex; }
-    .switchSet .switch button.clicked-4 {
-      padding: 10px 30px 15px 30px;
-      font-size: 6ex; }
-    .switchSet .switch button.clicked-5 {
-      padding: 12px 36px 18px 36px;
-      font-size: 7ex; }
-    .switchSet .switch button.clicked-6 {
-      padding: 14px 42px 21px 42px;
-      font-size: 8ex; }
-    .switchSet .switch button.clicked-7 {
-      padding: 16px 48px 24px 48px;
-      font-size: 9ex; }
-    .switchSet .switch button.clicked-8 {
-      padding: 18px 54px 27px 54px;
-      font-size: 10ex; }
-    .switchSet .switch button.clicked-9 {
-      padding: 20px 60px 30px 60px;
-      font-size: 11ex; }
-    .switchSet .switch button.clicked-10 {
-      padding: 22px 66px 33px 66px;
-      font-size: 12ex; }
-    .switchSet .switch button.clicked-11 {
-      padding: 24px 72px 36px 72px;
-      font-size: 13ex; }
-    .switchSet .switch button.clicked-12 {
-      padding: 26px 78px 39px 78px;
-      font-size: 14ex; }
-    .switchSet .switch button.clicked-13 {
-      padding: 28px 84px 42px 84px;
-      font-size: 15ex; }
-    .switchSet .switch button.clicked-14 {
-      padding: 30px 90px 45px 90px;
-      font-size: 16ex; }
-    .switchSet .switch button.clicked-15 {
-      padding: 32px 96px 48px 96px;
-      font-size: 17ex; }
-    .switchSet .switch button.clicked-16 {
-      padding: 34px 102px 51px 102px;
-      font-size: 18ex; }
-    .switchSet .switch button.clicked-17 {
-      padding: 36px 108px 54px 108px;
-      font-size: 19ex; }
-    .switchSet .switch button.clicked-18 {
-      padding: 38px 114px 57px 114px;
-      font-size: 20ex; }
-    .switchSet .switch button.clicked-19 {
-      padding: 40px 120px 60px 120px;
-      font-size: 21ex; }
+    align-items: center;
+    margin: 0em 1em 0em 1em; }
+  .switchSet div button {
+    transition: all 0.2s ease-in-out; }
+  .switchSet div.clicked-0 button {
+    color: transparent;
+    padding: 0px;
+    width: 1em;
+    height: 1em; }
+  .switchSet div.clicked-1 button {
+    padding: 2px 6px 3px 6px;
+    font-size: 1ex; }
+  .switchSet div.clicked-2 button {
+    padding: 4px 12px 6px 12px;
+    font-size: 2ex; }
+  .switchSet div.clicked-3 button {
+    padding: 6px 18px 9px 18px;
+    font-size: 3ex; }
+  .switchSet div.clicked-4 button {
+    padding: 8px 24px 12px 24px;
+    font-size: 4ex; }
+  .switchSet div.clicked-5 button {
+    padding: 10px 30px 15px 30px;
+    font-size: 5ex; }
+  .switchSet div.clicked-6 button {
+    padding: 12px 36px 18px 36px;
+    font-size: 6ex; }
+  .switchSet div.clicked-7 button {
+    padding: 14px 42px 21px 42px;
+    font-size: 7ex; }
+  .switchSet div.clicked-8 button {
+    padding: 16px 48px 24px 48px;
+    font-size: 8ex; }
+  .switchSet div.clicked-9 button {
+    padding: 18px 54px 27px 54px;
+    font-size: 9ex; }
+  .switchSet div.clicked-10 button {
+    padding: 20px 60px 30px 60px;
+    font-size: 10ex; }
+  .switchSet div.clicked-11 button {
+    padding: 22px 66px 33px 66px;
+    font-size: 11ex; }
+  .switchSet div.clicked-12 button {
+    padding: 24px 72px 36px 72px;
+    font-size: 12ex; }
+  .switchSet div.clicked-13 button {
+    padding: 26px 78px 39px 78px;
+    font-size: 13ex; }
+  .switchSet div.clicked-14 button {
+    padding: 28px 84px 42px 84px;
+    font-size: 14ex; }
+  .switchSet div.clicked-15 button {
+    padding: 30px 90px 45px 90px;
+    font-size: 15ex; }
+  .switchSet div.clicked-16 button {
+    padding: 32px 96px 48px 96px;
+    font-size: 16ex; }
+  .switchSet div.clicked-17 button {
+    padding: 34px 102px 51px 102px;
+    font-size: 17ex; }
+  .switchSet div.clicked-18 button {
+    padding: 36px 108px 54px 108px;
+    font-size: 18ex; }
+  .switchSet div.clicked-19 button {
+    padding: 38px 114px 57px 114px;
+    font-size: 19ex; }
   .switchSet .switch-enter button, .switchSet .switch-enter span {
-    opacity: 0;
-    width: 0%; }
+    opacity: 0; }
   .switchSet .switch-enter.switch-enter-active button, .switchSet .switch-enter.switch-enter-active span {
     opacity: 1.0;
-    width: 100%;
     transition: all 500ms ease-in; }
 
 .modal {

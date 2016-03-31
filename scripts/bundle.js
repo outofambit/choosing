@@ -19817,28 +19817,20 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 var Switch = function Switch(props) {
   return React.createElement(
     'div',
-    { className: 'switch' },
+    {
+      className: 'switch' + ' clicked-' + props.clicks,
+      key: props.label
+    },
     React.createElement(
       'button',
       {
         key: props.label,
-        className: 'btn btn-default clicked-' + props.clicks + (props.active ? ' active' : ' inactive'),
+        className: 'btn btn-default' + (props.active ? ' active' : ' inactive'),
         onClick: function onClick() {
           props.parentAction(props.label);
         } },
       props.label
     )
-  );
-};
-
-var Space = function Space(props) {
-  return React.createElement(
-    'span',
-    { className: 'space' + (props.entice ? ' clickme' : ''),
-      onClick: function onClick() {
-        props.parentAction(props.ind);
-      } },
-    '  '
   );
 };
 
@@ -19858,14 +19850,13 @@ var SwitchSet = function (_React$Component) {
     var stateMap = new Map(kvs);
 
     var kkvs = _this.props.switchData.map(function (da) {
-      return [da.label, 0];
+      return [da.label, da.show ? 2 : 0];
     });
     var clicksMap = new Map(kkvs);
 
     _this.state = {
       switches: stateMap,
       clicks: clicksMap,
-      showInds: [0, _this.props.switchData.length - 1],
       entice: false
     };
     return _this;
@@ -19884,22 +19875,6 @@ var SwitchSet = function (_React$Component) {
       this.setState({ switches: newSwitchMap });
       this.setState({ clicks: newClicksMap });
     }
-  }, {
-    key: 'handleSpaceClicked',
-    value: function handleSpaceClicked(ind) {
-      var newInd = this.state.showInds[ind] + Math.round((this.state.showInds[ind + 1] - this.state.showInds[ind]) / 2);
-      var showInds = this.state.showInds;
-      showInds.push(newInd);
-      showInds.sort(function (a, b) {
-        return a - b;
-      });
-      // TODO: dont do if new ind is already in the array
-      this.setState({ showInds: showInds });
-      if (this.state.entice) {
-        this.setState({ entice: false });
-      }
-      // this.setState({clicks: this.state.clicks + 1});
-    }
 
     // called right after the element first renders
 
@@ -19915,12 +19890,46 @@ var SwitchSet = function (_React$Component) {
       }, 7000);
     }
   }, {
+    key: 'calculateSeedIndices',
+    value: function calculateSeedIndices() {
+      var ret = [];
+      for (var i = 0; i < this.props.switchData.length; i++) {
+        if (this.state.clicks.get(this.props.switchData[i].label) > 0) {
+          continue;
+        }
+        // left
+        var left = 0;
+        for (var j = i; j > -1; j--) {
+          if (this.state.clicks.get(this.props.switchData[j].label) > 0) {
+            left = j;
+            break;
+          }
+        }
+        // right
+        var right = this.props.switchData.length - 1;
+        for (var j = i; j < this.props.switchData.length; j++) {
+          if (this.state.clicks.get(this.props.switchData[j].label) > 0) {
+            right = j;
+            break;
+          }
+        }
+        // am i between those?
+        if (i < this.props.switchData.length / 2 && Math.floor((right - left) / 2 + left) == i) {
+          ret.push(i);
+        } else if (i > this.props.switchData.length / 2 && Math.ceil((right - left) / 2 + left) == i) {
+          ret.push(i);
+        }
+      }
+      return ret;
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this3 = this;
 
+      var seedIndices = this.calculateSeedIndices();
       var sws = this.props.switchData.map(function (da, ind, arr) {
-        if (_this3.state.showInds.includes(ind)) {
+        if (_this3.state.clicks.get(da.label) > 0 || seedIndices.includes(ind)) {
           return React.createElement(Switch, _extends({}, da, {
             active: _this3.state.switches.get(da.label),
             clicks: _this3.state.clicks.get(da.label),
@@ -19930,27 +19939,13 @@ var SwitchSet = function (_React$Component) {
       });
       // clean up the undefineds
       sws = sws.filter(function (val) {
-        if (val) {
-          return true;
-        }
-        return false;
+        return val;
       });
-      // add in the spaces to a new array
-      var sswss = [];
-      sws.forEach(function (el, ind, arr) {
-        sswss.push(el);
-        if (ind != arr.length - 1) {
-          sswss.push(React.createElement(Space, {
-            key: 'space' + ind,
-            ind: ind,
-            parentAction: _this3.handleSpaceClicked.bind(_this3),
-            entice: _this3.state.entice }));
-        }
-      });
+
       return React.createElement(
         ReactCSSTransitionGroup,
         { className: 'switchSet', transitionName: 'switch', transitionEnterTimeout: 500, transitionLeaveTimeout: 300 },
-        sswss
+        sws
       );
     }
   }]);
@@ -19972,7 +19967,13 @@ var Modal = function Modal(props) {
 };
 
 // make some test data
-var swda = [{ label: 'man' }, { label: 'masc' }, { label: 'sissy' }, { label: 'androgynous' }, { label: 'tomboy' }, { label: 'femme' }, { label: 'woman' }];
+var swda = [{ label: 'stoic' }, { label: 'strong' }, { label: 'manly',
+  show: true
+}, { label: 'masc' }, { label: 'boyish' }, { label: 'sissy' }, { label: 'genderbending' }, { label: 'androgynous' },
+// {label: 'queer'},
+{ label: 'butch' }, { label: 'tomboy' }, { label: 'girly' }, { label: 'femme' }, { label: 'womanly',
+  show: true
+}, { label: 'coquettish' }, { label: 'vulnerable' }];
 
 var set = React.createElement(SwitchSet, { switchData: swda, maxClicks: '20' });
 
