@@ -21,8 +21,6 @@ html, body {
   flex-wrap: nowrap;
   padding: 2rem;
 
-  // transition: width 0.2s ease-in-out;
-
   span.space {
     align-self: stretch;
     width: 1.5em;
@@ -57,9 +55,15 @@ html, body {
     button {
       transition: padding 0.2s ease-in-out;
       transition: font-size 0.2s ease-in-out;
+      margin: 0em 1em 0em 1em;
     }
 
-    @for $i from 0 to $button-steps {
+    button.clicked-0 {
+      padding: 0;
+      font-size: 0px;
+    }
+
+    @for $i from 1 to $button-steps {
       button.clicked-#{$i} {
         padding: (($i+1)*2px) (($i+1)*6px) (($i+1)*3px) (($i+1)*6px);
         font-size: (1ex * ($i))
@@ -77,11 +81,9 @@ html, body {
   // react transition
   .switch-enter button, .switch-enter span {
     opacity: 0;
-    width: 0%;
   }
   .switch-enter.switch-enter-active button, .switch-enter.switch-enter-active span  {
     opacity: 1.0;
-    width: 100%;
     transition: all 500ms ease-in;
   }
 
