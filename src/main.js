@@ -4,10 +4,13 @@ let ReactDOM = require('react-dom');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 const Switch = (props) =>
-  <div className='switch'>
+  <div
+    className={'switch' + ' clicked-' + props.clicks}
+    key={props.label}
+  >
   <button
     key={props.label}
-    className={'btn btn-default clicked-' + props.clicks + (props.active ? ' active' : ' inactive')}
+    className={'btn btn-default'  + (props.active ? ' active' : ' inactive')}
     onClick={() => {props.parentAction(props.label)}}>
     {props.label}
   </button>

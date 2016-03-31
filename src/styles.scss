@@ -52,23 +52,7 @@ html, body {
     align-content: center;
     align-items: center;
 
-    button {
-      transition: padding 0.2s ease-in-out;
-      transition: font-size 0.2s ease-in-out;
-      margin: 0em 1em 0em 1em;
-    }
-
-    button.clicked-0 {
-      padding: 0;
-      font-size: 0px;
-    }
-
-    @for $i from 1 to $button-steps {
-      button.clicked-#{$i} {
-        padding: (($i+1)*2px) (($i+1)*6px) (($i+1)*3px) (($i+1)*6px);
-        font-size: (1ex * ($i))
-      }
-    }
+    margin: 0em 1em 0em 1em;
 
     button.active {
     }
@@ -76,6 +60,28 @@ html, body {
     button.inactive {
     }
 
+  }
+
+  div {
+    transition: padding 0.2s ease-in-out;
+
+    button {
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  div.clicked-0 button {
+      color: transparent;
+      padding: 0px;
+      width: 1em;
+      height: 1em;
+  }
+
+  @for $i from 1 to $button-steps {
+    div.clicked-#{$i} button {
+        padding: (($i)*2px) (($i)*6px) (($i)*3px) (($i)*6px);
+        font-size: (1ex * ($i))
+    }
   }
 
   // react transition
