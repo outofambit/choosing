@@ -21,30 +21,6 @@ html, body {
   flex-wrap: nowrap;
   padding: 2rem;
 
-  span.space {
-    align-self: stretch;
-    width: 1.5em;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-
-  span.space.clickme {
-    animation-duration: 3s;
-    animation-name: pulse;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
-  }
-
-  @keyframes pulse {
-    from {
-      background-color: transparent;
-    }
-
-    to {
-      background-color: transparentize(orange, 0.5);
-    }
-  }
-
   .switch {
 
     display: flex;
