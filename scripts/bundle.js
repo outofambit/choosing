@@ -11329,6 +11329,10 @@ var ReactEmptyComponentInjection = {
   }
 };
 
+function registerNullComponentID() {
+  ReactEmptyComponentRegistry.registerNullComponentID(this._rootNodeID);
+}
+
 var ReactEmptyComponent = function (instantiate) {
   this._currentElement = null;
   this._rootNodeID = null;
@@ -11337,7 +11341,7 @@ var ReactEmptyComponent = function (instantiate) {
 assign(ReactEmptyComponent.prototype, {
   construct: function (element) {},
   mountComponent: function (rootID, transaction, context) {
-    ReactEmptyComponentRegistry.registerNullComponentID(rootID);
+    transaction.getReactMountReady().enqueue(registerNullComponentID, this);
     this._rootNodeID = rootID;
     return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
   },
@@ -16058,7 +16062,7 @@ module.exports = ReactUpdates;
 
 'use strict';
 
-module.exports = '0.14.7';
+module.exports = '0.14.8';
 },{}],121:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -19834,32 +19838,106 @@ var Switch = function Switch(props) {
   );
 };
 
-var SwitchSet = function (_React$Component) {
-  _inherits(SwitchSet, _React$Component);
+var SwitchDrag = function (_React$Component) {
+  _inherits(SwitchDrag, _React$Component);
+
+  function SwitchDrag(props) {
+    _classCallCheck(this, SwitchDrag);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SwitchDrag).call(this, props));
+
+    _this.state = {
+      ox: 0,
+      oy: 0,
+      x: 0,
+      y: 0,
+      px: 0,
+      py: 0
+    };
+    return _this;
+  }
+
+  _createClass(SwitchDrag, [{
+    key: 'getDragStarted',
+    value: function getDragStarted(e) {
+      this.setState({
+        ox: this.state.x,
+        oy: this.state.y,
+        px: e.clientX,
+        py: e.clientY
+      });
+    }
+  }, {
+    key: 'getDragged',
+    value: function getDragged(e) {
+
+      this.setState({
+        x: this.state.ox + (e.clientX - this.state.px),
+        y: this.state.oy + (e.clientY - this.state.py)
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var transformation = {
+        transform: 'translate(' + this.state.x + 'px, ' + this.state.y + 'px)'
+      };
+
+      return React.createElement(
+        'div',
+        {
+          className: 'switch' + ' clicked-' + this.props.clicks,
+          key: this.props.label
+        },
+        React.createElement(
+          'button',
+          {
+            key: this.props.label,
+            className: 'btn btn-default' + (this.props.active ? ' active' : ' inactive'),
+            onClick: function onClick() {
+              _this2.props.parentAction(_this2.props.label);
+            },
+            draggable: 'true',
+            onDrag: this.getDragged.bind(this),
+            onDragStart: this.getDragStarted.bind(this),
+            style: transformation },
+          this.props.label
+        )
+      );
+    }
+  }]);
+
+  return SwitchDrag;
+}(React.Component);
+
+var SwitchSet = function (_React$Component2) {
+  _inherits(SwitchSet, _React$Component2);
 
   function SwitchSet(props) {
     _classCallCheck(this, SwitchSet);
 
     // set up state (on/off) map
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SwitchSet).call(this, props));
+    var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(SwitchSet).call(this, props));
 
-    var kvs = _this.props.switchData.map(function (da) {
+    var kvs = _this3.props.switchData.map(function (da) {
       return [da.label, false];
     });
     var stateMap = new Map(kvs);
 
-    var kkvs = _this.props.switchData.map(function (da) {
+    var kkvs = _this3.props.switchData.map(function (da) {
       return [da.label, da.show ? 2 : 0];
     });
     var clicksMap = new Map(kkvs);
 
-    _this.state = {
+    _this3.state = {
       switches: stateMap,
       clicks: clicksMap,
       entice: false
     };
-    return _this;
+    return _this3;
   }
 
   _createClass(SwitchSet, [{
@@ -19881,11 +19959,11 @@ var SwitchSet = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this4 = this;
 
       setTimeout(function () {
-        if (_this2.state.showInds.length == 2) {
-          _this2.setState({ entice: true });
+        if (_this4.state.showInds.length == 2) {
+          _this4.setState({ entice: true });
         }
       }, 7000);
     }
@@ -19925,15 +20003,15 @@ var SwitchSet = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this5 = this;
 
       var seedIndices = this.calculateSeedIndices();
       var sws = this.props.switchData.map(function (da, ind, arr) {
-        if (_this3.state.clicks.get(da.label) > 0 || seedIndices.includes(ind)) {
-          return React.createElement(Switch, _extends({}, da, {
-            active: _this3.state.switches.get(da.label),
-            clicks: _this3.state.clicks.get(da.label),
-            parentAction: _this3.handleSwitchClicked.bind(_this3),
+        if (_this5.state.clicks.get(da.label) > 0 || seedIndices.includes(ind)) {
+          return React.createElement(SwitchDrag, _extends({}, da, {
+            active: _this5.state.switches.get(da.label),
+            clicks: _this5.state.clicks.get(da.label),
+            parentAction: _this5.handleSwitchClicked.bind(_this5),
             key: da.label }));
         }
       });

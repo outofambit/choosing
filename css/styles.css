@@ -23,7 +23,8 @@ html, body {
     align-items: center;
     margin: 0em 1em 0em 1em; }
   .switchSet div button {
-    transition: all 0.2s ease-in-out; }
+    transition: all 0.2s ease-in-out;
+    transition: transform 0; }
   .switchSet div.clicked-0 button {
     color: transparent;
     padding: 0px;
