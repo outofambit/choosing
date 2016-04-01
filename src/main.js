@@ -16,6 +16,63 @@ const Switch = (props) =>
   </button>
   </div>
 
+class SwitchDrag extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      ox: 0,
+      oy: 0,
+      x: 0,
+      y: 0,
+      px: 0,
+      py: 0
+    };
+  }
+
+  getDragStarted(e) {
+    this.setState({
+      ox: this.state.x,
+      oy: this.state.y,
+      px: e.clientX,
+      py: e.clientY
+    })
+  }
+
+  getDragged(e) {
+
+    this.setState({
+      x: this.state.ox + (e.clientX - this.state.px),
+      y: this.state.oy + (e.clientY - this.state.py),
+    })
+  }
+
+  render() {
+
+    let transformation = {
+      transform: 'translate(' + this.state.x + 'px, ' + this.state.y + 'px)',
+    };
+
+    return (
+      <div
+        className={'switch' + ' clicked-' + this.props.clicks}
+        key={this.props.label}
+      >
+      <button
+        key={this.props.label}
+        className={'btn btn-default'  + (this.props.active ? ' active' : ' inactive')}
+        onClick={() => {this.props.parentAction(this.props.label)}}
+        draggable='true'
+        onDrag={this.getDragged.bind(this)}
+        onDragStart={this.getDragStarted.bind(this)}
+        style={transformation}>
+        {this.props.label}
+      </button>
+      </div>
+    )
+  }
+
+}
+
 class SwitchSet extends React.Component {
   constructor(props) {
     super(props);
@@ -98,7 +155,7 @@ class SwitchSet extends React.Component {
     let sws = this.props.switchData.map((da, ind, arr) => {
       if (this.state.clicks.get(da.label) > 0 || seedIndices.includes(ind)) {
         return (
-          <Switch {...da}
+          <SwitchDrag {...da}
             active={this.state.switches.get(da.label)}
             clicks={this.state.clicks.get(da.label)}
             parentAction={this.handleSwitchClicked.bind(this)}

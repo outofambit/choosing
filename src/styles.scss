@@ -40,6 +40,7 @@ html, body {
 
   div button {
     transition: all 0.2s ease-in-out;
+    transition: transform 0;
   }
 
   div.clicked-0 button {
@@ -52,7 +53,7 @@ html, body {
   @for $i from 1 to $button-steps {
     div.clicked-#{$i} button {
       padding: (($i)*2px) (($i)*6px) (($i)*3px) (($i)*6px);
-      font-size: (1ex * ($i))
+      font-size: (1ex * ($i));
     }
   }
 
