@@ -3,6 +3,11 @@ let React = require('react');
 let ReactDOM = require('react-dom');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
+// a little document setup
+document.ontouchmove = (event) => {
+    event.preventDefault();
+}
+
 const Switch = (props) =>
   <div
     className={'switch' + ' clicked-' + props.clicks}
@@ -33,16 +38,16 @@ class SwitchDrag extends React.Component {
     this.setState({
       ox: this.state.x,
       oy: this.state.y,
-      px: e.clientX,
-      py: e.clientY
+      px: e.targetTouches[0].pageX,
+      py: e.targetTouches[0].pageY
     })
   }
 
   getDragged(e) {
 
     this.setState({
-      x: this.state.ox + (e.clientX - this.state.px),
-      y: this.state.oy + (e.clientY - this.state.py),
+      x: this.state.ox + (e.targetTouches[0].pageX - this.state.px),
+      y: this.state.oy + (e.targetTouches[0].pageY - this.state.py),
     })
   }
 
@@ -62,8 +67,8 @@ class SwitchDrag extends React.Component {
         className={'btn btn-default'  + (this.props.active ? ' active' : ' inactive')}
         onClick={() => {this.props.parentAction(this.props.label)}}
         draggable='true'
-        onDrag={this.getDragged.bind(this)}
-        onDragStart={this.getDragStarted.bind(this)}
+        onTouchMove={this.getDragged.bind(this)}
+        onTouchStart={this.getDragStarted.bind(this)}
         style={transformation}>
         {this.props.label}
       </button>
