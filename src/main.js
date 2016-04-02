@@ -34,6 +34,22 @@ class SwitchDrag extends React.Component {
     };
   }
 
+  getMouseDragged(e) {
+    this.setState({
+      x: this.state.ox + (e.clientX - this.state.px),
+      y: this.state.oy + (e.clientY - this.state.py),
+    })
+  }
+
+  getMouseDragStarted(e) {
+    this.setState({
+      ox: this.state.x,
+      oy: this.state.y,
+      px: e.clientX,
+      py: e.clientY
+    })
+  }
+
   getDragStarted(e) {
     this.setState({
       ox: this.state.x,
@@ -44,7 +60,6 @@ class SwitchDrag extends React.Component {
   }
 
   getDragged(e) {
-
     this.setState({
       x: this.state.ox + (e.targetTouches[0].pageX - this.state.px),
       y: this.state.oy + (e.targetTouches[0].pageY - this.state.py),
@@ -67,6 +82,8 @@ class SwitchDrag extends React.Component {
         className={'btn btn-default'  + (this.props.active ? ' active' : ' inactive')}
         onClick={() => {this.props.parentAction(this.props.label)}}
         draggable='true'
+        onDragStart={this.getMouseDragStarted.bind(this)}
+        onDrag={this.getMouseDragged.bind(this)}
         onTouchMove={this.getDragged.bind(this)}
         onTouchStart={this.getDragStarted.bind(this)}
         style={transformation}>
