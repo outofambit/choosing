@@ -179,24 +179,24 @@ const Modal = (props) =>
 // make some test data
 let swda = [
   {label: 'stoic'},
-  {label: 'strong'},
+  // {label: 'strong'},
   {label: 'manly',
     show: true
   },
   {label: 'masc'},
   {label: 'boyish'},
   {label: 'sissy'},
-  {label: 'genderbending'},
+  // {label: 'genderbending'},
   {label: 'androgynous'},
   // {label: 'queer'},
   {label: 'butch'},
-  {label: 'tomboy'},
+  // {label: 'tomboy'},
   {label: 'girly'},
   {label: 'femme'},
   {label: 'womanly',
     show: true
   },
-  {label: 'coquettish'},
+  // {label: 'coquettish'},
   {label: 'vulnerable'}
 ]
 
