@@ -1,5 +1,4 @@
 html, body {
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,70 +22,74 @@ html, body {
     align-items: center;
     margin: 0em 1em 0em 1em; }
   .switchSet div button {
-    transition: all 0.2s ease-in-out;
-    transition: transform 0; }
+    transition: padding 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
+    transition: width 0.2s ease-in-out;
+    transition: height 0.2s ease-in-out;
+    transition: font-size 0.2s ease-in-out; }
   .switchSet div.clicked-0 button {
     color: transparent;
     padding: 0px;
-    width: 1em;
-    height: 1em; }
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.25rem; }
   .switchSet div.clicked-1 button {
-    padding: 2px 6px 3px 6px;
-    font-size: 1ex; }
+    padding: 0.125rem 0.25rem 0.125rem 0.25rem;
+    font-size: 0.25rem; }
   .switchSet div.clicked-2 button {
-    padding: 4px 12px 6px 12px;
-    font-size: 2ex; }
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    font-size: 0.5rem; }
   .switchSet div.clicked-3 button {
-    padding: 6px 18px 9px 18px;
-    font-size: 3ex; }
+    padding: 0.375rem 0.75rem 0.375rem 0.75rem;
+    font-size: 0.75rem; }
   .switchSet div.clicked-4 button {
-    padding: 8px 24px 12px 24px;
-    font-size: 4ex; }
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 1rem; }
   .switchSet div.clicked-5 button {
-    padding: 10px 30px 15px 30px;
-    font-size: 5ex; }
+    padding: 0.625rem 1.25rem 0.625rem 1.25rem;
+    font-size: 1.25rem; }
   .switchSet div.clicked-6 button {
-    padding: 12px 36px 18px 36px;
-    font-size: 6ex; }
+    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+    font-size: 1.5rem; }
   .switchSet div.clicked-7 button {
-    padding: 14px 42px 21px 42px;
-    font-size: 7ex; }
+    padding: 0.875rem 1.75rem 0.875rem 1.75rem;
+    font-size: 1.75rem; }
   .switchSet div.clicked-8 button {
-    padding: 16px 48px 24px 48px;
-    font-size: 8ex; }
+    padding: 1rem 2rem 1rem 2rem;
+    font-size: 2rem; }
   .switchSet div.clicked-9 button {
-    padding: 18px 54px 27px 54px;
-    font-size: 9ex; }
+    padding: 1.125rem 2.25rem 1.125rem 2.25rem;
+    font-size: 2.25rem; }
   .switchSet div.clicked-10 button {
-    padding: 20px 60px 30px 60px;
-    font-size: 10ex; }
+    padding: 1.25rem 2.5rem 1.25rem 2.5rem;
+    font-size: 2.5rem; }
   .switchSet div.clicked-11 button {
-    padding: 22px 66px 33px 66px;
-    font-size: 11ex; }
+    padding: 1.375rem 2.75rem 1.375rem 2.75rem;
+    font-size: 2.75rem; }
   .switchSet div.clicked-12 button {
-    padding: 24px 72px 36px 72px;
-    font-size: 12ex; }
+    padding: 1.5rem 3rem 1.5rem 3rem;
+    font-size: 3rem; }
   .switchSet div.clicked-13 button {
-    padding: 26px 78px 39px 78px;
-    font-size: 13ex; }
+    padding: 1.625rem 3.25rem 1.625rem 3.25rem;
+    font-size: 3.25rem; }
   .switchSet div.clicked-14 button {
-    padding: 28px 84px 42px 84px;
-    font-size: 14ex; }
+    padding: 1.75rem 3.5rem 1.75rem 3.5rem;
+    font-size: 3.5rem; }
   .switchSet div.clicked-15 button {
-    padding: 30px 90px 45px 90px;
-    font-size: 15ex; }
+    padding: 1.875rem 3.75rem 1.875rem 3.75rem;
+    font-size: 3.75rem; }
   .switchSet div.clicked-16 button {
-    padding: 32px 96px 48px 96px;
-    font-size: 16ex; }
+    padding: 2rem 4rem 2rem 4rem;
+    font-size: 4rem; }
   .switchSet div.clicked-17 button {
-    padding: 34px 102px 51px 102px;
-    font-size: 17ex; }
+    padding: 2.125rem 4.25rem 2.125rem 4.25rem;
+    font-size: 4.25rem; }
   .switchSet div.clicked-18 button {
-    padding: 36px 108px 54px 108px;
-    font-size: 18ex; }
+    padding: 2.25rem 4.5rem 2.25rem 4.5rem;
+    font-size: 4.5rem; }
   .switchSet div.clicked-19 button {
-    padding: 38px 114px 57px 114px;
-    font-size: 19ex; }
+    padding: 2.375rem 4.75rem 2.375rem 4.75rem;
+    font-size: 4.75rem; }
   .switchSet .switch-enter button, .switchSet .switch-enter span {
     opacity: 0; }
   .switchSet .switch-enter.switch-enter-active button, .switchSet .switch-enter.switch-enter-active span {
@@ -101,6 +104,7 @@ html, body {
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
   color: #333;
   background-color: white;
+  margin-top: 20vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

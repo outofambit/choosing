@@ -19818,6 +19818,11 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
+// a little document setup
+document.ontouchmove = function (event) {
+  event.preventDefault();
+};
+
 var Switch = function Switch(props) {
   return React.createElement(
     'div',
@@ -19863,8 +19868,8 @@ var SwitchDrag = function (_React$Component) {
       this.setState({
         ox: this.state.x,
         oy: this.state.y,
-        px: e.clientX,
-        py: e.clientY
+        px: e.targetTouches[0].pageX,
+        py: e.targetTouches[0].pageY
       });
     }
   }, {
@@ -19872,8 +19877,8 @@ var SwitchDrag = function (_React$Component) {
     value: function getDragged(e) {
 
       this.setState({
-        x: this.state.ox + (e.clientX - this.state.px),
-        y: this.state.oy + (e.clientY - this.state.py)
+        x: this.state.ox + (e.targetTouches[0].pageX - this.state.px),
+        y: this.state.oy + (e.targetTouches[0].pageY - this.state.py)
       });
     }
   }, {
@@ -19900,8 +19905,8 @@ var SwitchDrag = function (_React$Component) {
               _this2.props.parentAction(_this2.props.label);
             },
             draggable: 'true',
-            onDrag: this.getDragged.bind(this),
-            onDragStart: this.getDragStarted.bind(this),
+            onTouchMove: this.getDragged.bind(this),
+            onTouchStart: this.getDragStarted.bind(this),
             style: transformation },
           this.props.label
         )
@@ -19928,7 +19933,7 @@ var SwitchSet = function (_React$Component2) {
     var stateMap = new Map(kvs);
 
     var kkvs = _this3.props.switchData.map(function (da) {
-      return [da.label, da.show ? 2 : 0];
+      return [da.label, da.show ? 4 : 0];
     });
     var clicksMap = new Map(kkvs);
 
