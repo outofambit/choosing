@@ -19958,20 +19958,6 @@ var SwitchSet = function (_React$Component2) {
       this.setState({ switches: newSwitchMap });
       this.setState({ clicks: newClicksMap });
     }
-
-    // called right after the element first renders
-
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this4 = this;
-
-      setTimeout(function () {
-        if (_this4.state.showInds.length == 2) {
-          _this4.setState({ entice: true });
-        }
-      }, 7000);
-    }
   }, {
     key: 'calculateSeedIndices',
     value: function calculateSeedIndices() {
@@ -20008,15 +19994,15 @@ var SwitchSet = function (_React$Component2) {
   }, {
     key: 'render',
     value: function render() {
-      var _this5 = this;
+      var _this4 = this;
 
       var seedIndices = this.calculateSeedIndices();
       var sws = this.props.switchData.map(function (da, ind, arr) {
-        if (_this5.state.clicks.get(da.label) > 0 || seedIndices.includes(ind)) {
+        if (_this4.state.clicks.get(da.label) > 0 || seedIndices.includes(ind)) {
           return React.createElement(SwitchDrag, _extends({}, da, {
-            active: _this5.state.switches.get(da.label),
-            clicks: _this5.state.clicks.get(da.label),
-            parentAction: _this5.handleSwitchClicked.bind(_this5),
+            active: _this4.state.switches.get(da.label),
+            clicks: _this4.state.clicks.get(da.label),
+            parentAction: _this4.handleSwitchClicked.bind(_this4),
             key: da.label }));
         }
       });
@@ -20050,13 +20036,21 @@ var Modal = function Modal(props) {
 };
 
 // make some test data
-var swda = [{ label: 'stoic' }, { label: 'strong' }, { label: 'manly',
+var swda = [{ label: 'stoic' },
+// {label: 'strong'},
+{ label: 'manly',
   show: true
-}, { label: 'masc' }, { label: 'boyish' }, { label: 'sissy' }, { label: 'genderbending' }, { label: 'androgynous' },
+}, { label: 'masc' }, { label: 'boyish' }, { label: 'sissy' },
+// {label: 'genderbending'},
+{ label: 'androgynous' },
 // {label: 'queer'},
-{ label: 'butch' }, { label: 'tomboy' }, { label: 'girly' }, { label: 'femme' }, { label: 'womanly',
+{ label: 'butch' },
+// {label: 'tomboy'},
+{ label: 'girly' }, { label: 'femme' }, { label: 'womanly',
   show: true
-}, { label: 'coquettish' }, { label: 'vulnerable' }];
+},
+// {label: 'coquettish'},
+{ label: 'vulnerable' }];
 
 var set = React.createElement(SwitchSet, { switchData: swda, maxClicks: '20' });
 
