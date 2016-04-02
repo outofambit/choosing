@@ -112,15 +112,6 @@ class SwitchSet extends React.Component {
     this.setState({clicks: newClicksMap});
   }
 
-  // called right after the element first renders
-  componentDidMount () {
-    setTimeout(() => {
-      if (this.state.showInds.length == 2) {
-        this.setState({entice: true})
-      }
-    }, 7000);
-  }
-
   calculateSeedIndices() {
     let ret = []
     for (var i = 0; i < this.props.switchData.length; i++) {
