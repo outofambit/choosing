@@ -3,10 +3,18 @@ var gulp = require('gulp')
 var browserify = require('browserify')
 var babelify = require('babelify')
 var source = require('vinyl-source-stream')
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync');
+var sass = require('gulp-sass')
+var browserSync = require('browser-sync')
+var connect = require('gulp-connect')
 
-gulp.task('browser-sync', function() {
+gulp.task('heroku', ['sass', 'js'], () => {
+  connect.server({
+    root: 'public',
+    port: process.env.PORT
+  });
+})
+
+gulp.task('browser-sync', () => {
     browserSync({
         server: {
             baseDir: "public/"
