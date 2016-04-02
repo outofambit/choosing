@@ -1,5 +1,4 @@
 html, body {
-  // height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +17,7 @@ html, body {
   justify-content: center;
   align-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   padding: 2rem;
 
   .switch {
@@ -39,21 +38,25 @@ html, body {
   }
 
   div button {
-    transition: all 0.2s ease-in-out;
-    transition: transform 0;
+    transition: padding 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
+    transition: width 0.2s ease-in-out;
+    transition: height 0.2s ease-in-out;
+    transition: font-size 0.2s ease-in-out;
   }
 
   div.clicked-0 button {
     color: transparent;
     padding: 0px;
-    width: 1em;
-    height: 1em;
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.25rem;
   }
 
   @for $i from 1 to $button-steps {
     div.clicked-#{$i} button {
-      padding: (($i)*2px) (($i)*6px) (($i)*3px) (($i)*6px);
-      font-size: (1ex * ($i));
+      padding: (($i)*0.125rem) (($i)*0.25rem) (($i)*0.125rem) (($i)*0.25rem);
+      font-size: (0.25rem * ($i));
     }
   }
 

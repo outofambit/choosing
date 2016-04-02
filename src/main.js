@@ -89,7 +89,7 @@ class SwitchSet extends React.Component {
     let stateMap = new Map(kvs);
 
     let kkvs = this.props.switchData.map((da) => {
-      return [da.label, da.show ? 2 : 0];
+      return [da.label, da.show ? 4 : 0];
     });
     let clicksMap = new Map(kkvs);
 
