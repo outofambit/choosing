@@ -3,11 +3,6 @@ let React = require('react');
 let ReactDOM = require('react-dom');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
-// a little document setup
-document.ontouchmove = (event) => {
-    event.preventDefault();
-}
-
 const Switch = (props) =>
   <div
     className={'switch' + ' clicked-' + props.clicks}
