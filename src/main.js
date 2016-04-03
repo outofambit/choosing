@@ -3,6 +3,11 @@ let React = require('react');
 let ReactDOM = require('react-dom');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
+// globally disable mobile drag scrolling
+document.ontouchmove = (event) => {
+  event.preventDefault();
+}
+
 const Switch = (props) =>
   <div
     className={'switch' + ' clicked-' + props.clicks}
