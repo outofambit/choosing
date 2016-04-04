@@ -39,9 +39,6 @@ html, body {
 
   div button {
     transition: padding 0.2s ease-in-out;
-    transition: color 0.2s ease-in-out;
-    transition: width 0.2s ease-in-out;
-    transition: height 0.2s ease-in-out;
     transition: font-size 0.2s ease-in-out;
     cursor: move;
     cursor: grab;
@@ -50,10 +47,7 @@ html, body {
   }
 
   div.clicked-0 button {
-    color: transparent;
-    padding: 0px;
-    width: 1rem;
-    height: 1rem;
+    padding: 0.25rem;
     font-size: 0.25rem;
   }
 

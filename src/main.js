@@ -87,7 +87,7 @@ class SwitchDrag extends React.Component {
         onTouchMove={this.getDragged.bind(this)}
         onTouchStart={this.getDragStarted.bind(this)}
         style={transformation}>
-        {this.props.label}
+        {this.props.clicks > 0 ? this.props.label : '?'}
       </button>
       </div>
     )
