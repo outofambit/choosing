@@ -202,7 +202,7 @@ let swda = [
   },
   {label: 'masc'},
   {label: 'boyish'},
-  {label: 'sissy'},
+  {label: 'sensitive'},
   // {label: 'genderbending'},
   {label: 'androgynous'},
   // {label: 'queer'},
